@@ -1,19 +1,16 @@
-package status;
-import Repository.ProductOrderRepository;
-
+package dao;
+import constructors.ProductOrderDetailsCons;
+import repository.ProductOrderRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Constructors.ProductOrderDetailsCons;
 
-
-
-public class UpdateProductStatus {
+public class UpdateProductStatusDAO {
 	Map<Integer, ProductOrderDetailsCons> prod;
-	public UpdateProductStatus() 
+	public UpdateProductStatusDAO() 
 	{
 		prod= ProductOrderRepository.get();
 		
@@ -46,6 +43,13 @@ public class UpdateProductStatus {
        return "data inserted";
        
 		
+	}
+	public String getDetails(int Id) {
+		String result = null;
+		for(Map.Entry<Integer, ProductOrderDetailsCons> obj : prod.entrySet() ) {
+			result = obj.getValue().getOrderid()+"\n"+obj.getValue().getExitdate()+"\n"+obj.getValue().getManufacturingdate()+"\n"+obj.getValue().getExpirydate();
+		}
+		return result;
 	}
 
 }
